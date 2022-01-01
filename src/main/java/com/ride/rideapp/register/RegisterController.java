@@ -33,8 +33,10 @@ public class RegisterController {
     public Driver registerDriver(
             @RequestParam(value="username") String username,
             @RequestParam(value="mobile") String mobile,
-            @RequestParam(value="password") String password)  {
-        return registerService.registerDriver(username, mobile, password);
+            @RequestParam(value="password") String password,
+            @RequestParam(value="national_id") String national_id,
+            @RequestParam(value="driver_license") String driver_license)  {
+        return registerService.registerDriver(username, mobile, password, national_id, driver_license);
     }
 
 }

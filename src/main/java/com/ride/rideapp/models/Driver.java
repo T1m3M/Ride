@@ -1,24 +1,13 @@
 package com.ride.rideapp.models;
 
-import com.ride.rideapp.completeProfile.CompleteProfileRepo;
-import com.ride.rideapp.completeProfile.CompleteProfileService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Driver extends User implements CompleteProfileService {
+public class Driver extends User {
     private boolean account_status;
     String national_id, driver_license;
     float average_rating;
     boolean verification_status;
-
-    @Autowired
-    CompleteProfileRepo completeProfileRepo;
-
-    @Override
-    public Driver complete_profile(int id, String national_id, String driver_license) {
-        return completeProfileRepo.completeProfile(id, national_id, driver_license);
-    }
 
     public boolean getAccount_status() {
         return account_status;
