@@ -1,4 +1,4 @@
-package com.ride.rideapp.complete_profile;
+package com.ride.rideapp.completeProfile;
 
 import com.ride.rideapp.models.Driver;
 import org.springframework.beans.factory.annotation.Autowired;

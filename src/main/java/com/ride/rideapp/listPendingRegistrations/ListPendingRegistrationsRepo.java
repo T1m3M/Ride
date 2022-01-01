@@ -1,4 +1,4 @@
-package com.ride.rideapp.list_pending_registrations;
+package com.ride.rideapp.listPendingRegistrations;
 
 import com.ride.rideapp.mappers.DriverRowMapper;
 import com.ride.rideapp.models.Driver;

@@ -1,7 +1,7 @@
 package com.ride.rideapp.models;
 
-import com.ride.rideapp.complete_profile.CompleteProfileRepo;
-import com.ride.rideapp.complete_profile.CompleteProfileService;
+import com.ride.rideapp.completeProfile.CompleteProfileRepo;
+import com.ride.rideapp.completeProfile.CompleteProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

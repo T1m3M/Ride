@@ -1,8 +1,6 @@
-package com.ride.rideapp.complete_profile;
+package com.ride.rideapp.completeProfile;
 
-import com.ride.rideapp.mappers.CustomerRowMapper;
 import com.ride.rideapp.mappers.DriverRowMapper;
-import com.ride.rideapp.models.Customer;
 import com.ride.rideapp.models.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
