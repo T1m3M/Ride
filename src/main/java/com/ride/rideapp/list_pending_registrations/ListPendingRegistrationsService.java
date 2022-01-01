@@ -1,0 +1,18 @@
+package com.ride.rideapp.list_pending_registrations;
+
+import com.ride.rideapp.models.Driver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ListPendingRegistrationsService {
+
+    @Autowired
+    private ListPendingRegistrationsRepo listPendingRegistrationsRepo;
+
+    public List<Driver> listPendingRegistrations() {
+        return listPendingRegistrationsRepo.listAll();
+    }
+}
