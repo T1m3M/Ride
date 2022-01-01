@@ -1,13 +1,19 @@
 package com.ride.rideapp.models;
 
+import com.ride.rideapp.login.LoginService;
+import com.ride.rideapp.login.LoginRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 
-public class User {
+public abstract class User implements LoginService {
     @Id
     int id;
 
     String username, mobile, password;
     boolean account_status;
+
+    @Autowired
+    LoginRepo loginRepo;
 
     public int getId() {
         return id;
