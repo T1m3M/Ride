@@ -19,7 +19,7 @@ public class LoginRepo {
 
 
     public Admin loginAdmin(String mobile, String password) {
-        String sql = "SELECT * FROM admins WHERE mobile=" + mobile + " AND password=" + password;
+        String sql = "SELECT * FROM admins WHERE mobile=" + mobile + " AND password=" + password + " AND account_status=true";
         List<Admin> result = conn.query(sql, new AdminRowMapper());
 
         if (!result.isEmpty())
@@ -29,7 +29,7 @@ public class LoginRepo {
 
 
     public Customer loginCustomer(String mobile, String password) {
-        String sql = "SELECT * FROM customers WHERE mobile=" + mobile + " AND password=" + password;
+        String sql = "SELECT * FROM customers WHERE mobile=" + mobile + " AND password=" + password + " AND account_status=true";
         List<Customer> result = conn.query(sql, new CustomerRowMapper());
 
         if (!result.isEmpty())
@@ -38,7 +38,7 @@ public class LoginRepo {
     }
 
     public Driver loginDriver(String mobile, String password) {
-        String sql = "SELECT * FROM drivers WHERE mobile=" + mobile + " AND password=" + password;
+        String sql = "SELECT * FROM drivers WHERE mobile=" + mobile + " AND password=" + password + " AND account_status=true";
         List<Driver> result = conn.query(sql, new DriverRowMapper());
 
         if (!result.isEmpty())
