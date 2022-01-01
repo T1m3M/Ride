@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/complete_profile")
+@RequestMapping(value = "/driver")
 public class CompleteProfileController {
 
     @Autowired
     private Driver driver;
 
-    @PutMapping("/driver")
+    @PutMapping("/complete_profile")
     public Driver registerDriver(
             @RequestParam(value="id") Integer id,
             @RequestParam(value="national_id") String national_id,
