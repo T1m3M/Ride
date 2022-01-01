@@ -12,8 +12,8 @@ public class Customer extends User {
     }
 
     @Override
-    public Admin register(String username, String mobileNumber, String password) {
-        return null;
+    public Customer register(String username, String mobile, String password) {
+        return registerRepo.registerCustomer(username, mobile, password);
     }
 
     public boolean getAccount_status() {
