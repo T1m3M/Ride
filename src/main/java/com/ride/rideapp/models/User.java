@@ -10,7 +10,6 @@ public abstract class User implements LoginService {
     int id;
 
     String username, mobile, password;
-    boolean account_status;
 
     @Autowired
     LoginRepo loginRepo;
@@ -47,11 +46,4 @@ public abstract class User implements LoginService {
         this.password = password;
     }
 
-    public boolean isAccount_status() {
-        return account_status;
-    }
-
-    public void setAccount_status(boolean account_status) {
-        this.account_status = account_status;
-    }
 }

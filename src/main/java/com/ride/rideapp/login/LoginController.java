@@ -1,6 +1,7 @@
 package com.ride.rideapp.login;
 
-import com.ride.rideapp.models.User;
+import com.ride.rideapp.models.Admin;
+import com.ride.rideapp.models.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +13,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @Autowired
-    private LoginService loginService;
+    private Admin admin;
+
+    @Autowired
+    private Customer customer;
 
     @GetMapping("/admin")
-    public User loginAdmin(@RequestParam(value="mobile") String mobile,
+    public Admin loginAdmin(@RequestParam(value="mobile") String mobile,
                                  @RequestParam(value="password") String password)  {
-        return loginService.login(mobile, password);
+        return admin.login(mobile, password);
+    }
+
+    @GetMapping("/customer")
+    public Customer loginCustomer(@RequestParam(value="mobile") String mobile,
+                            @RequestParam(value="password") String password)  {
+        return customer.login(mobile, password);
     }
 }
