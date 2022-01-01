@@ -9,4 +9,4 @@ create table customers
 );
 
 INSERT INTO ridedb.customers (id, username, mobile, password, account_status) VALUES (1, 'bahaa', '111', '111', 1);
-INSERT INTO ridedb.customers (id, username, mobile, password, account_status) VALUES (2, 'mohamed', '112', '112', 1);
+INSERT INTO ridedb.customers (id, username, mobile, password, account_status) VALUES (2, 'mohamed', '112', '112', 0);
