@@ -16,8 +16,10 @@ public class Driver extends User {
 
 
     @Override
-    public Admin register(String username, String mobileNumber, String password) {
-        return null;
+    public Driver register(String username,
+                           String mobile,
+                           String password) {
+        return registerRepo.registerDriver(username, mobile, password);
     }
 
     public boolean getAccount_status() {

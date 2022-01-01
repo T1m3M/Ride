@@ -2,8 +2,10 @@ package com.ride.rideapp.register;
 
 import com.ride.rideapp.mappers.AdminRowMapper;
 import com.ride.rideapp.mappers.CustomerRowMapper;
+import com.ride.rideapp.mappers.DriverRowMapper;
 import com.ride.rideapp.models.Admin;
 import com.ride.rideapp.models.Customer;
+import com.ride.rideapp.models.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -73,5 +75,44 @@ public class RegisterRepo {
 
         return null;
 
+    }
+
+    public Driver registerDriver(String username, String mobile, String password) {
+        String sql = "SELECT * FROM drivers WHERE mobile=" + mobile;
+        List<Driver> result = conn.query(sql, new DriverRowMapper());
+
+        if (result.isEmpty()) {
+            // getting last admin id
+            sql = "SELECT * FROM drivers ORDER BY id DESC LIMIT 1";
+            result = conn.query(sql, new DriverRowMapper());
+            int lastId = result.get(0).getId();
+
+            // saving admin user object
+            Driver user = new Driver();
+            user.setId(lastId + 1);
+            user.setUsername(username);
+            user.setMobile(mobile);
+            user.setPassword(password);
+            user.setAccount_status(true);
+            user.setAverage_rating(0.0F);
+            user.setVerification_status(false);
+
+            sql = "INSERT INTO drivers(id, username, mobile, password, account_status, average_rating, verification_status) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            conn.update(
+                    sql,
+                    user.getId(),
+                    user.getUsername(),
+                    user.getMobile(),
+                    user.getPassword(),
+                    user.getAccount_status(),
+                    user.getAverage_rating(),
+                    user.getVerification_status()
+            );
+
+            return user;
+
+        }
+
+        return null;
     }
 }
