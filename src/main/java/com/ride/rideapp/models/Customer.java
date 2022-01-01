@@ -6,16 +6,6 @@ import org.springframework.stereotype.Component;
 public class Customer extends User {
     private boolean account_status;
 
-    @Override
-    public Customer login(String mobile, String password) {
-        return loginRepo.loginCustomer(mobile, password);
-    }
-
-    @Override
-    public Customer register(String username, String mobile, String password) {
-        return registerRepo.registerCustomer(username, mobile, password);
-    }
-
     public boolean getAccount_status() {
         return account_status;
     }

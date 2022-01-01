@@ -11,20 +11,14 @@ import org.springframework.web.bind.annotation.*;
 public class RegisterController {
 
     @Autowired
-    private Admin admin;
-
-    @Autowired
-    private Customer customer;
-
-    @Autowired
-    private Driver driver;
+    private RegisterService registerService;
 
     @PostMapping("/admin")
     public Admin registerAdmin(
             @RequestParam(value="username") String username,
             @RequestParam(value="mobile") String mobile,
             @RequestParam(value="password") String password)  {
-        return admin.register(username, mobile, password);
+        return registerService.registerAdmin(username, mobile, password);
     }
 
     @PostMapping("/customer")
@@ -32,7 +26,7 @@ public class RegisterController {
             @RequestParam(value="username") String username,
             @RequestParam(value="mobile") String mobile,
             @RequestParam(value="password") String password)  {
-        return customer.register(username, mobile, password);
+        return registerService.registerCustomer(username, mobile, password);
     }
 
     @PostMapping("/driver")
@@ -40,7 +34,7 @@ public class RegisterController {
             @RequestParam(value="username") String username,
             @RequestParam(value="mobile") String mobile,
             @RequestParam(value="password") String password)  {
-        return driver.register(username, mobile, password);
+        return registerService.registerDriver(username, mobile, password);
     }
 
 }

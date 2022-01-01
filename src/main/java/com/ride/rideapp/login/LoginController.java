@@ -14,29 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @Autowired
-    private Admin admin;
-
-    @Autowired
-    private Customer customer;
-
-    @Autowired
-    private Driver driver;
+    private LoginService loginService;
 
     @GetMapping("/admin")
     public Admin loginAdmin(@RequestParam(value="mobile") String mobile,
                                  @RequestParam(value="password") String password)  {
-        return admin.login(mobile, password);
+        return loginService.loginAdmin(mobile, password);
     }
 
     @GetMapping("/customer")
     public Customer loginCustomer(@RequestParam(value="mobile") String mobile,
                             @RequestParam(value="password") String password)  {
-        return customer.login(mobile, password);
+        return loginService.loginCustomer(mobile, password);
     }
 
     @GetMapping("/driver")
     public Driver loginDriver(@RequestParam(value="mobile") String mobile,
                               @RequestParam(value="password") String password)  {
-        return driver.login(mobile, password);
+        return loginService.loginDriver(mobile, password);
     }
 }

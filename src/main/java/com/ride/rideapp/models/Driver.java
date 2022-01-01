@@ -16,19 +16,6 @@ public class Driver extends User implements CompleteProfileService {
     CompleteProfileRepo completeProfileRepo;
 
     @Override
-    public Driver login(String mobile, String password) {
-        return loginRepo.loginDriver(mobile, password);
-    }
-
-
-    @Override
-    public Driver register(String username,
-                           String mobile,
-                           String password) {
-        return registerRepo.registerDriver(username, mobile, password);
-    }
-
-    @Override
     public Driver complete_profile(int id, String national_id, String driver_license) {
         return completeProfileRepo.completeProfile(id, national_id, driver_license);
     }
