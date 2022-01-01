@@ -1,13 +1,19 @@
 package com.ride.rideapp.models;
 
+import com.ride.rideapp.complete_profile.CompleteProfileRepo;
+import com.ride.rideapp.complete_profile.CompleteProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Driver extends User {
+public class Driver extends User implements CompleteProfileService {
     private boolean account_status;
     String national_id, driver_license;
     float average_rating;
     boolean verification_status;
+
+    @Autowired
+    CompleteProfileRepo completeProfileRepo;
 
     @Override
     public Driver login(String mobile, String password) {
@@ -20,6 +26,11 @@ public class Driver extends User {
                            String mobile,
                            String password) {
         return registerRepo.registerDriver(username, mobile, password);
+    }
+
+    @Override
+    public Driver complete_profile(int id, String national_id, String driver_license) {
+        return completeProfileRepo.completeProfile(id, national_id, driver_license);
     }
 
     public boolean getAccount_status() {
