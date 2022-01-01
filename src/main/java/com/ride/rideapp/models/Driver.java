@@ -14,6 +14,12 @@ public class Driver extends User {
         return loginRepo.loginDriver(mobile, password);
     }
 
+
+    @Override
+    public Admin register(String username, String mobileNumber, String password) {
+        return null;
+    }
+
     public boolean getAccount_status() {
         return account_status;
     }

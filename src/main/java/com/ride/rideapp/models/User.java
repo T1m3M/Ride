@@ -2,10 +2,12 @@ package com.ride.rideapp.models;
 
 import com.ride.rideapp.login.LoginService;
 import com.ride.rideapp.login.LoginRepo;
+import com.ride.rideapp.register.RegisterRepo;
+import com.ride.rideapp.register.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 
-public abstract class User implements LoginService {
+public abstract class User implements LoginService, RegisterService {
     @Id
     int id;
 
@@ -13,6 +15,9 @@ public abstract class User implements LoginService {
 
     @Autowired
     LoginRepo loginRepo;
+
+    @Autowired
+    RegisterRepo registerRepo;
 
     public int getId() {
         return id;

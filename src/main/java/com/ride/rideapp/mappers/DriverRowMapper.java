@@ -1,4 +1,4 @@
-package com.ride.rideapp.login;
+package com.ride.rideapp.mappers;
 
 import com.ride.rideapp.models.Driver;
 import org.springframework.jdbc.core.RowMapper;

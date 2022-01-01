@@ -11,6 +11,11 @@ public class Customer extends User {
         return loginRepo.loginCustomer(mobile, password);
     }
 
+    @Override
+    public Admin register(String username, String mobileNumber, String password) {
+        return null;
+    }
+
     public boolean getAccount_status() {
         return account_status;
     }
