@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @Autowired
-    UserRepo userRepo;
+    private LoginService loginService;
 
     @GetMapping("/admin")
     public User loginAdmin(@RequestParam(value="mobile") String mobile,
-                            @RequestParam(value="password") String password)  {
-        return userRepo.loginUser(mobile, password);
+                                 @RequestParam(value="password") String password)  {
+        return loginService.login(mobile, password);
     }
 }

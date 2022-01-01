@@ -5,14 +5,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class UserRepo {
 
-    private final JdbcTemplate conn;
-
-    public UserRepo(JdbcTemplate jdbcTemplate) {
-        this.conn = jdbcTemplate;
-    }
+    @Autowired
+    private JdbcTemplate conn;
 
     RowMapper<User> rowMapper = (rs, rowNum) -> {
         User user = new User();
@@ -26,7 +25,11 @@ public class UserRepo {
     };
 
     public User loginUser(String mobile, String password) {
-        String sql = "SELECT * FROM admins WHERE mobile = " + mobile + " AND password = " + password;
-        return (User) conn.query(sql, rowMapper);
+        String sql = "SELECT * FROM admins WHERE mobile=" + mobile + " AND password=" + password;
+        List<User> result = conn.query(sql, rowMapper);
+
+        if (!result.isEmpty())
+            return result.get(0);
+        return null;
     }
 }
