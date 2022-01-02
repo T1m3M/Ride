@@ -30,8 +30,8 @@ public class AcceptOfferRepo {
             conn.update(sql, offer.getOffer_status(), offer.getOffer_time());
 
             // change ride status
-            sql = "UPDATE rides SET ride_status=? WHERE id=" + offer.getRide_id();
-            conn.update(sql, false);
+            sql = "UPDATE rides SET offer_id=?, ride_status=? WHERE id=" + offer.getRide_id();
+            conn.update(sql, offer.getId(), false);
 
             return offer;
         }
