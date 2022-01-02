@@ -29,6 +29,10 @@ public class EndRideRepo {
             sql = "UPDATE rides SET end_time=? WHERE id=" + ride_id;
             conn.update(sql, ride.getEnd_time());
 
+            // change driver available status and increment seats number
+            sql = "UPDATE drivers SET available_status=?, seats_number = seats_number + 1 WHERE id=" + ride_id;
+            conn.update(sql, true);
+
             return ride;
         }
 
