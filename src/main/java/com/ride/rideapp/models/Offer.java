@@ -11,7 +11,7 @@ public class Offer {
     int id;
 
     int ride_id, driver_id;
-    int price;
+    float price;
 
     Timestamp offer_time, accept_time;
     boolean offer_status;
@@ -40,11 +40,11 @@ public class Offer {
         this.driver_id = driver_id;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
