@@ -6,6 +6,8 @@ import com.ride.rideapp.models.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class RegisterService {
 
@@ -16,8 +18,8 @@ public class RegisterService {
         return registerRepo.registerAdmin(username, mobile, password);
     }
 
-    public Customer registerCustomer(String username, String mobile, String password) {
-        return registerRepo.registerCustomer(username, mobile, password);
+    public Customer registerCustomer(String username, String mobile, String password, Date birthdate) {
+        return registerRepo.registerCustomer(username, mobile, password, birthdate);
     }
 
     public Driver registerDriver(String username, String mobile, String password, String national_id, String driver_license) {

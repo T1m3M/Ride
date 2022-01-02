@@ -4,7 +4,10 @@ import com.ride.rideapp.models.Admin;
 import com.ride.rideapp.models.Customer;
 import com.ride.rideapp.models.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 @RequestMapping(value = "/register")
@@ -25,8 +28,9 @@ public class RegisterController {
     public Customer registerCustomer(
             @RequestParam(value="username") String username,
             @RequestParam(value="mobile") String mobile,
-            @RequestParam(value="password") String password)  {
-        return registerService.registerCustomer(username, mobile, password);
+            @RequestParam(value="password") String password,
+            @RequestParam(value="birthdate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate)  {
+        return registerService.registerCustomer(username, mobile, password, birthdate);
     }
 
     @PostMapping("/driver")

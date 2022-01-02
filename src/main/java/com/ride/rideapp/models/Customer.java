@@ -2,9 +2,20 @@ package com.ride.rideapp.models;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class Customer extends User {
     private boolean account_status;
+    private Date birthdate;
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
 
     public boolean getAccount_status() {
         return account_status;

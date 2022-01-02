@@ -10,7 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static java.util.Date.parse;
 
 @Repository
 public class RegisterRepo {
@@ -47,7 +51,7 @@ public class RegisterRepo {
         return null;
     }
 
-    public Customer registerCustomer(String username, String mobile, String password) {
+    public Customer registerCustomer(String username, String mobile, String password, Date birthdate) {
 
         String sql = "SELECT * FROM customers WHERE mobile=" + mobile;
         List<Customer> result = conn.query(sql, new CustomerRowMapper());
@@ -65,9 +69,10 @@ public class RegisterRepo {
             user.setMobile(mobile);
             user.setPassword(password);
             user.setAccount_status(true);
+            user.setBirthdate(birthdate);
 
-            sql = "INSERT INTO customers(id, username, mobile, password, account_status) VALUES(?, ?, ?, ?, ?)";
-            conn.update(sql, user.getId(), user.getUsername(), user.getMobile(), user.getPassword(), user.getAccount_status());
+            sql = "INSERT INTO customers(id, username, mobile, password, account_status, birthdate) VALUES(?, ?, ?, ?, ?, ?)";
+            conn.update(sql, user.getId(), user.getUsername(), user.getMobile(), user.getPassword(), user.getAccount_status(), user.getBirthdate());
 
             return user;
 
