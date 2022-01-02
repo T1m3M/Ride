@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 public abstract class GlobalArea {
     @Id
     int id;
-    String name;
+    String area_name;
 
     public int getId() {
         return id;
@@ -15,11 +15,11 @@ public abstract class GlobalArea {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getArea_name() {
+        return area_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setArea_name(String area_name) {
+        this.area_name = area_name;
     }
 }
