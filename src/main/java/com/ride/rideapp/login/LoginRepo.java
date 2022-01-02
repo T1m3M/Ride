@@ -19,7 +19,7 @@ public class LoginRepo {
 
 
     public Admin loginAdmin(String mobile, String password) {
-        String sql = "SELECT * FROM admins WHERE mobile=" + mobile + " AND password=" + password + " AND account_status=true";
+        String sql = "SELECT * FROM admins WHERE mobile=" + mobile + " AND password=" + password;
         List<Admin> result = conn.query(sql, new AdminRowMapper());
 
         if (!result.isEmpty())
