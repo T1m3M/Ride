@@ -16,7 +16,7 @@ public class RequestRideRepo {
     @Autowired
     private JdbcTemplate conn;
 
-    public Ride requestRide(String source, String destination, Integer number_of_passengers) {
+    public Ride requestRide(int customer_id, String source, String destination, Integer number_of_passengers) {
 
         // getting last ride id
         String sql = "SELECT * FROM rides ORDER BY id DESC LIMIT 1";
@@ -28,13 +28,14 @@ public class RequestRideRepo {
         // saving ride object
         Ride ride = new Ride();
         ride.setId(lastId + 1);
+        ride.setCustomer_id(customer_id);
         ride.setSource(source);
         ride.setDestination(destination);
         ride.setNumber_of_passengers(number_of_passengers);
         ride.setRide_status(true);
 
-        sql = "INSERT INTO rides(id, source, destination, number_of_passengers, ride_status) VALUES(?, ?, ?, ?, ?)";
-        conn.update(sql, ride.getId(), ride.getSource(), ride.getDestination(), ride.getNumber_of_passengers(), ride.getRide_status());
+        sql = "INSERT INTO rides(id, customer_id, source, destination, number_of_passengers, ride_status) VALUES(?, ?, ?, ?, ?, ?)";
+        conn.update(sql, ride.getId(), ride.getCustomer_id(), ride.getSource(), ride.getDestination(), ride.getNumber_of_passengers(), ride.getRide_status());
 
         return ride;
     }

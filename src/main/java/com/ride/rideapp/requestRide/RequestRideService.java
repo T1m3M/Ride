@@ -10,7 +10,7 @@ public class RequestRideService {
     @Autowired
     RequestRideRepo requestRideRepo;
 
-    public Ride requestRide(String source, String destination, Integer number_of_passengers) {
-        return requestRideRepo.requestRide(source, destination, number_of_passengers);
+    public Ride requestRide(int customer_id, String source, String destination, Integer number_of_passengers) {
+        return requestRideRepo.requestRide(customer_id, source, destination, number_of_passengers);
     }
 }

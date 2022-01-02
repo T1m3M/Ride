@@ -11,6 +11,7 @@ public class RideRowMapper implements RowMapper<Ride> {
     public Ride mapRow(ResultSet rs, int rowNum) throws SQLException {
         Ride ride = new Ride();
         ride.setId(rs.getInt("id"));
+        ride.setCustomer_id(rs.getInt("customer_id"));
         ride.setSource(rs.getString("source"));
         ride.setDestination(rs.getString("destination"));
         ride.setNumber_of_passengers(rs.getInt("number_of_passengers"));

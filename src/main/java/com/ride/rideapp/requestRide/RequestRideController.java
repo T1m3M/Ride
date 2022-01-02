@@ -16,10 +16,11 @@ public class RequestRideController {
 
     @PostMapping("/request_ride")
     public Ride requestRide(
+            @RequestParam(value="customer_id") Integer customer_id,
             @RequestParam(value="source") String source,
             @RequestParam(value="destination") String destination,
             @RequestParam(value="number_of_passengers") Integer number_of_passengers) {
-        return requestRideService.requestRide(source, destination, number_of_passengers);
+        return requestRideService.requestRide(customer_id,source, destination, number_of_passengers);
     }
 
 

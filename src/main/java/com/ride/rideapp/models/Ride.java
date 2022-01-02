@@ -10,6 +10,8 @@ public class Ride {
     @Id
     int id;
 
+    int customer_id;
+
     String source, destination;
     int number_of_passengers;
 
@@ -39,6 +41,14 @@ public class Ride {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public int getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
     }
 
     public int getNumber_of_passengers() {
