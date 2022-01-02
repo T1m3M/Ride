@@ -39,8 +39,9 @@ public class RegisterController {
             @RequestParam(value="mobile") String mobile,
             @RequestParam(value="password") String password,
             @RequestParam(value="national_id") String national_id,
-            @RequestParam(value="driver_license") String driver_license)  {
-        return registerService.registerDriver(username, mobile, password, national_id, driver_license);
+            @RequestParam(value="driver_license") String driver_license,
+            @RequestParam(value="seats_number") int seats_number)  {
+        return registerService.registerDriver(username, mobile, password, national_id, driver_license, seats_number);
     }
 
 }

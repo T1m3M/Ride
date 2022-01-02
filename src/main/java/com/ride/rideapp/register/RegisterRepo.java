@@ -82,7 +82,7 @@ public class RegisterRepo {
 
     }
 
-    public Driver registerDriver(String username, String mobile, String password, String national_id, String driver_license) {
+    public Driver registerDriver(String username, String mobile, String password, String national_id, String driver_license, int seats_num) {
         String sql = "SELECT * FROM drivers WHERE mobile=" + mobile;
         List<Driver> result = conn.query(sql, new DriverRowMapper());
 
@@ -103,8 +103,10 @@ public class RegisterRepo {
             user.setDriver_license(driver_license);
             user.setAverage_rating(0.0F);
             user.setVerification_status(false);
+            user.setAvailable_status(true);
+            user.setSeats_number(seats_num);
 
-            sql = "INSERT INTO drivers(id, username, mobile, password, account_status, national_id, driver_license, average_rating, verification_status) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO drivers(id, username, mobile, password, account_status, national_id, driver_license, average_rating, verification_status, available_status, seats_number) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             conn.update(
                     sql,
                     user.getId(),
@@ -115,7 +117,9 @@ public class RegisterRepo {
                     user.getNational_id(),
                     user.getDriver_license(),
                     user.getAverage_rating(),
-                    user.getVerification_status()
+                    user.getVerification_status(),
+                    user.getAvailable_status(),
+                    user.getSeats_number()
             );
 
             return user;

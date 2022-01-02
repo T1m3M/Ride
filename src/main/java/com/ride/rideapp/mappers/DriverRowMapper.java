@@ -19,6 +19,8 @@ public class DriverRowMapper implements RowMapper<Driver> {
         user.setDriver_license(rs.getString("driver_license"));
         user.setAverage_rating(rs.getFloat("average_rating"));
         user.setVerification_status(rs.getBoolean("verification_status"));
+        user.setAvailable_status(rs.getBoolean("available_status"));
+        user.setSeats_number(rs.getInt("seats_number"));
 
         return user;
     }

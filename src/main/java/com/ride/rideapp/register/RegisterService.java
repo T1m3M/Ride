@@ -22,7 +22,7 @@ public class RegisterService {
         return registerRepo.registerCustomer(username, mobile, password, birthdate);
     }
 
-    public Driver registerDriver(String username, String mobile, String password, String national_id, String driver_license) {
-        return registerRepo.registerDriver(username, mobile, password, national_id, driver_license);
+    public Driver registerDriver(String username, String mobile, String password, String national_id, String driver_license, int seats_number) {
+        return registerRepo.registerDriver(username, mobile, password, national_id, driver_license, seats_number);
     }
 }

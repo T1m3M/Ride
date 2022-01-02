@@ -8,6 +8,24 @@ public class Driver extends User {
     String national_id, driver_license;
     float average_rating;
     boolean verification_status;
+    boolean available_status;
+    int seats_number;
+
+    public boolean getAvailable_status() {
+        return available_status;
+    }
+
+    public void setAvailable_status(boolean available_status) {
+        this.available_status = available_status;
+    }
+
+    public int getSeats_number() {
+        return seats_number;
+    }
+
+    public void setSeats_number(int seats_number) {
+        this.seats_number = seats_number;
+    }
 
     public boolean getAccount_status() {
         return account_status;
