@@ -16,5 +16,5 @@ create table rides
         foreign key (offer_id) references offers (id)
 );
 
-INSERT INTO ridedb.rides (id, customer_id, source, destination, number_of_passengers, start_time, end_time, offer_id, ride_status) VALUES (1, 1, 'Dokki', 'Haram', 2, '2022-01-02 14:38:12', '2022-01-02 14:57:29', 1, 0);
+INSERT INTO ridedb.rides (id, customer_id, source, destination, number_of_passengers, start_time, end_time, offer_id, ride_status) VALUES (1, 1, 'Dokki', 'Haram', 2, '2022-01-02 15:06:47', '2022-01-02 15:09:12', 1, 0);
 INSERT INTO ridedb.rides (id, customer_id, source, destination, number_of_passengers, start_time, end_time, offer_id, ride_status) VALUES (2, 3, 'Tahrir', 'Roxi', 4, null, null, null, 1);
