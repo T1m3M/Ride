@@ -19,7 +19,7 @@ public class RequestRideController {
             @RequestParam(value="source") String source,
             @RequestParam(value="destination") String destination,
             @RequestParam(value="number_of_passengers") Integer number_of_passengers) {
-        return null;
+        return requestRideService.requestRide(source, destination, number_of_passengers);
     }
 
 
