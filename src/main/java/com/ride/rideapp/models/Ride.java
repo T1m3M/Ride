@@ -11,6 +11,8 @@ public class Ride {
     int id;
 
     String source, destination;
+    int number_of_passengers;
+
     Timestamp start_time, end_time;
     int offer_id;
     boolean ride_status;
@@ -37,6 +39,14 @@ public class Ride {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public int getNumber_of_passengers() {
+        return number_of_passengers;
+    }
+
+    public void setNumber_of_passengers(int number_of_passengers) {
+        this.number_of_passengers = number_of_passengers;
     }
 
     public Timestamp getStart_time() {

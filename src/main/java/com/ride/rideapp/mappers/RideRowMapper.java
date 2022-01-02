@@ -13,6 +13,7 @@ public class RideRowMapper implements RowMapper<Ride> {
         ride.setId(rs.getInt("id"));
         ride.setSource(rs.getString("source"));
         ride.setDestination(rs.getString("destination"));
+        ride.setNumber_of_passengers(rs.getInt("number_of_passengers"));
         ride.setStart_time(rs.getTimestamp("start_time"));
         ride.setEnd_time(rs.getTimestamp("end_time"));
         ride.setOffer_id(rs.getInt("offer_id"));
