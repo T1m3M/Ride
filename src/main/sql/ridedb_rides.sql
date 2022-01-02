@@ -13,7 +13,8 @@ create table rides
     constraint rides_customers_id_fk
         foreign key (customer_id) references customers (id),
     constraint rides_offers_offer_id_fk
-        foreign key (offer_id) references offers (offer_id)
+        foreign key (offer_id) references offers (id)
 );
 
-INSERT INTO ridedb.rides (id, customer_id, source, destination, number_of_passengers, start_time, end_time, offer_id, ride_status) VALUES (1, 1, 'Dokki', 'Haram', 2, null, null, null, 1);
+INSERT INTO ridedb.rides (id, customer_id, source, destination, number_of_passengers, start_time, end_time, offer_id, ride_status) VALUES (1, 1, 'Dokki', 'Haram', 2, '2022-01-02 14:38:12', '2022-01-02 14:57:29', 1, 0);
+INSERT INTO ridedb.rides (id, customer_id, source, destination, number_of_passengers, start_time, end_time, offer_id, ride_status) VALUES (2, 3, 'Tahrir', 'Roxi', 4, null, null, null, 1);
