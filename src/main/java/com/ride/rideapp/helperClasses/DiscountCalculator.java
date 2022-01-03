@@ -1,6 +1,8 @@
 package com.ride.rideapp.helperClasses;
 
+import com.ride.rideapp.mappers.DiscountRowMapper;
 import com.ride.rideapp.mappers.RideRowMapper;
+import com.ride.rideapp.models.Discount;
 import com.ride.rideapp.models.Offer;
 import com.ride.rideapp.models.Ride;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -53,6 +55,17 @@ public class DiscountCalculator {
     }
 
     private static float discountedAreaDiscount(float price, Ride ride) {
+
+        String destination = ride.getDestination();
+
+        String sql = "SELECT * FROM discounts WHERE area_name='" + destination + "'";
+        List<Discount> discounts = conn.query(sql, new DiscountRowMapper());
+
+        if (!discounts.isEmpty()) {
+            float rate = discounts.get(0).getRate();
+            price = price - (price / rate);
+        }
+
         return price;
     }
 
