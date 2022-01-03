@@ -1,5 +1,8 @@
 package com.ride.rideapp.models;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TrackRideEvent extends Event {
     String captain_name;
     String user_name;

@@ -4,8 +4,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OfferEvent extends Event {
+
     String captain_name;
-    String user_name;
+    float price;
 
     public String getCaptain_name() {
         return captain_name;
@@ -15,11 +16,11 @@ public class OfferEvent extends Event {
         this.captain_name = captain_name;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public float getPrice() {
+        return price;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

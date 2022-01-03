@@ -1,5 +1,8 @@
 package com.ride.rideapp.models;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AcceptOfferEvent extends Event {
     String user_name;
 
