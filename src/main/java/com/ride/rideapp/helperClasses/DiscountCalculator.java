@@ -1,12 +1,17 @@
 package com.ride.rideapp.helperClasses;
 
 import com.ride.rideapp.mappers.DiscountRowMapper;
+import com.ride.rideapp.mappers.HolidayRowMapper;
 import com.ride.rideapp.mappers.RideRowMapper;
 import com.ride.rideapp.models.Discount;
+import com.ride.rideapp.models.Holiday;
 import com.ride.rideapp.models.Offer;
 import com.ride.rideapp.models.Ride;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class DiscountCalculator {
@@ -31,10 +36,10 @@ public class DiscountCalculator {
         price = twoPassengersDiscount(price, ride);
 
         // if date == public holiday --> 5% discount
-        price = holidayDiscount(price, ride);
+        price = holidayDiscount(price);
 
         // if user's birthday == today --> 10% discount
-        price = birthdayDiscount(price, ride);
+        price = birthdayDiscount(price, offer);
 
         return price;
     }
@@ -78,11 +83,21 @@ public class DiscountCalculator {
         return price;
     }
 
-    private static float holidayDiscount(float price, Ride ride) {
+    private static float holidayDiscount(float price) {
+        Date today_date = new Date();
+        DateFormat date_format = new SimpleDateFormat("MM-dd");
+        String today = date_format.format(today_date);
+
+        String sql = "SELECT * FROM holidays WHERE DATE_FORMAT(holiday_date, '%m-%d')=" + today;
+        List<Holiday> holidays = conn.query(sql, new HolidayRowMapper());
+
+        if (!holidays.isEmpty())
+            price = price - (price / 5);
+
         return price;
     }
 
-    private static float birthdayDiscount(float price, Ride ride) {
+    private static float birthdayDiscount(float price, Offer offer) {
         return price;
     }
 }
