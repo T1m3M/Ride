@@ -17,6 +17,8 @@ public class PutOfferRepo {
     @Autowired
     private JdbcTemplate conn;
 
+    private DiscountCalculator discountCalculator;
+
     public Offer putOffer(Integer driver_id, Integer ride_id, Float price) {
 
         String sql = "SELECT * FROM offers WHERE driver_id=" + driver_id + " AND ride_id=" + ride_id;
@@ -40,7 +42,7 @@ public class PutOfferRepo {
             offer.setOffer_status(true);
 
             // calculating all discounts for this price
-            offer.setAfter_discount(DiscountCalculator.calculateDiscount(offer));
+            offer.setAfter_discount(discountCalculator.calculateDiscount(offer));
 
             sql = "INSERT INTO offers(id, ride_id, driver_id, price, offer_time, offer_status) VALUES(?, ?, ?, ?, ?, ?)";
             conn.update(sql, offer.getId(), offer.getRide_id(), offer.getDriver_id(), offer.getPrice(), offer.getOffer_time(), offer.getOffer_status());
