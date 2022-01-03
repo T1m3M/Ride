@@ -12,3 +12,4 @@ create table customers
 INSERT INTO ridedb.customers (id, username, mobile, password, account_status, birthdate) VALUES (1, 'bahaa', '111', '111', 1, '1999-04-20');
 INSERT INTO ridedb.customers (id, username, mobile, password, account_status, birthdate) VALUES (2, 'mohamed', '112', '112', 0, '1999-05-20');
 INSERT INTO ridedb.customers (id, username, mobile, password, account_status, birthdate) VALUES (3, 'tamer', '113', '113', 1, '1999-07-13');
+INSERT INTO ridedb.customers (id, username, mobile, password, account_status, birthdate) VALUES (4, 'Hassan', '555', '555', 1, '2002-01-03');

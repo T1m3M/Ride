@@ -8,3 +8,5 @@ create table discounts
 
 INSERT INTO ridedb.discounts (id, area_name, rate) VALUES (1, 'Dokki', 10);
 INSERT INTO ridedb.discounts (id, area_name, rate) VALUES (2, 'Haram', 10);
+INSERT INTO ridedb.discounts (id, area_name, rate) VALUES (3, 'Zatoun', 10);
+INSERT INTO ridedb.discounts (id, area_name, rate) VALUES (4, 'Hadaiq', 10);

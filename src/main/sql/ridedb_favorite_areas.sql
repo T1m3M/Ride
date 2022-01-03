@@ -10,3 +10,4 @@ create table favorite_areas
 
 INSERT INTO ridedb.favorite_areas (id, area_name, driver_id) VALUES (1, 'Dokki', 1);
 INSERT INTO ridedb.favorite_areas (id, area_name, driver_id) VALUES (2, 'Zatoun', 3);
+INSERT INTO ridedb.favorite_areas (id, area_name, driver_id) VALUES (3, 'Tahrir', 4);
