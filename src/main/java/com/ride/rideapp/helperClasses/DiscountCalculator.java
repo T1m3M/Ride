@@ -27,7 +27,7 @@ public class DiscountCalculator {
         // if destination == discounted area --> rate% (rate = 10)
         price = discountedAreaDiscount(price, ride);
 
-        // if 2 passengers --> 5% discount
+        // if at least 2 passengers --> 5% discount
         price = twoPassengersDiscount(price, ride);
 
         // if date == public holiday --> 5% discount
@@ -70,6 +70,11 @@ public class DiscountCalculator {
     }
 
     private static float twoPassengersDiscount(float price, Ride ride) {
+        int number_of_passengers = ride.getNumber_of_passengers();
+
+        if (number_of_passengers >= 2)
+            price = price - (price / 5);
+
         return price;
     }
 
