@@ -19,7 +19,7 @@ public class EventLogRepo {
     JdbcTemplate conn;
 
     public OfferEvent showOffer(int ride_id) {
-        String sql = "SELECT offers.offer_time, drivers.username, offers.price " +
+        String sql = "SELECT offers.offer_time, drivers.username, offers.price, offers.after_discount " +
                      "FROM offers, drivers " +
                      "WHERE offers.ride_id = " + ride_id + " AND drivers.id = offers.driver_id";
 
@@ -29,7 +29,7 @@ public class EventLogRepo {
 
             // updating offer event object
             OfferEvent offer = result.get(0);
-            offer.setEvent_name("OFFER_EVENT");
+            offer.setEvent_name("SHOW_OFFER_EVENT");
 
             return offer;
         }

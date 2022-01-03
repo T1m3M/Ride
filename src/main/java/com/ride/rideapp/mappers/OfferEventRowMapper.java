@@ -13,6 +13,7 @@ public class OfferEventRowMapper implements RowMapper<OfferEvent> {
         offer.setEvent_time(rs.getTimestamp("offer_time"));
         offer.setCaptain_name(rs.getString("username"));
         offer.setPrice(rs.getFloat("price"));
+        offer.setAfter_discount(rs.getFloat("after_discount"));
 
         return offer;
     }
