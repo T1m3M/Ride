@@ -16,7 +16,7 @@ public class StartRideRepo {
     JdbcTemplate conn;
 
     public Ride startRide(int ride_id) {
-        String sql = "SELECT * FROM rides WHERE id=" + ride_id + " AND ride_status=false";
+        String sql = "SELECT * FROM rides WHERE id=" + ride_id + " AND ride_status=true";
         List<Ride> result = conn.query(sql, new RideRowMapper());
 
         if (!result.isEmpty()) {
@@ -24,10 +24,11 @@ public class StartRideRepo {
             // updating ride object
             Ride ride = result.get(0);
             ride.setStart_time(new Timestamp(System.currentTimeMillis()));
+            ride.setRide_status(false);
 
             // change ride start time
-            sql = "UPDATE rides SET start_time=? WHERE id=" + ride_id;
-            conn.update(sql, ride.getStart_time());
+            sql = "UPDATE rides SET start_time=?, ride_status=? WHERE id=" + ride_id;
+            conn.update(sql, ride.getStart_time(), ride.getRide_status());
 
             // change driver available status and decrement seats number
             sql = "UPDATE drivers SET available_status=?, seats_number = seats_number - 1 WHERE id=" + ride_id + " AND seats_number > 0";
