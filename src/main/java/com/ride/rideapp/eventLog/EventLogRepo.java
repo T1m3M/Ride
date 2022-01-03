@@ -78,6 +78,22 @@ public class EventLogRepo {
     }
 
     public TrackRideEvent rideEnd(int ride_id) {
+
+        String sql = "SELECT rides.end_time as event_time, drivers.username, customers.username " +
+                "FROM rides, drivers, customers, offers " +
+                "WHERE rides.id = " + ride_id + " AND rides.customer_id = customers.id AND rides.offer_id = offers.id AND offers.driver_id = drivers.id";
+
+        List<TrackRideEvent> result = conn.query(sql, new TrackRideEventRowMapper());
+
+        if (!result.isEmpty()) {
+
+            // updating track ride event object
+            TrackRideEvent track_ride = result.get(0);
+            track_ride.setEvent_name("RIDE_END_EVENT");
+
+            return track_ride;
+        }
+
         return null;
     }
 }
