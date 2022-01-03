@@ -16,7 +16,7 @@ public class EndRideRepo {
     JdbcTemplate conn;
 
     public Ride endRide(int ride_id) {
-        String sql = "SELECT * FROM rides WHERE id=" + ride_id + " AND ride_status=false";
+        String sql = "SELECT * FROM rides WHERE id=" + ride_id + " AND ride_status=false AND end_time IS NULL";
         List<Ride> result = conn.query(sql, new RideRowMapper());
 
         if (!result.isEmpty()) {
