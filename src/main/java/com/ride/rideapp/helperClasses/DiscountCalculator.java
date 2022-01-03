@@ -25,27 +25,24 @@ public class DiscountCalculator {
         Ride ride = conn.query(sql, new RideRowMapper()).get(0);
 
         // if first ride --> discount 10%
-        price = firstRideDiscount(price, ride);
+        price = firstRideDiscount(price, ride.getCustomer_id());
 
         // if destination == discounted area --> rate% (rate = 10)
-        price = discountedAreaDiscount(price, ride);
+        price = discountedAreaDiscount(price, ride.getDestination());
 
         // if at least 2 passengers --> 5% discount
-        price = twoPassengersDiscount(price, ride);
+        price = twoPassengersDiscount(price, ride.getNumber_of_passengers());
 
         // if date == public holiday --> 5% discount
         price = holidayDiscount(price);
 
         // if user's birthday == today --> 10% discount
-        price = birthdayDiscount(price, ride);
+        price = birthdayDiscount(price, ride.getCustomer_id());
 
         return price;
     }
 
-    private static float firstRideDiscount(float price, Ride ride) {
-
-        int customer_id = ride.getCustomer_id();
-
+    private static float firstRideDiscount(float price, int customer_id) {
         String sql = "SELECT * FROM rides WHERE customer_id=" + customer_id;
         List<Ride> all_customer_rides = conn.query(sql, new RideRowMapper());
 
@@ -57,10 +54,7 @@ public class DiscountCalculator {
         return price;
     }
 
-    private static float discountedAreaDiscount(float price, Ride ride) {
-
-        String destination = ride.getDestination();
-
+    private static float discountedAreaDiscount(float price, String destination) {
         String sql = "SELECT * FROM discounts WHERE area_name='" + destination + "'";
         List<Discount> discounts = conn.query(sql, new DiscountRowMapper());
 
@@ -72,9 +66,7 @@ public class DiscountCalculator {
         return price;
     }
 
-    private static float twoPassengersDiscount(float price, Ride ride) {
-        int number_of_passengers = ride.getNumber_of_passengers();
-
+    private static float twoPassengersDiscount(float price, int number_of_passengers) {
         if (number_of_passengers >= 2)
             price = price - (price / 5);
 
@@ -95,8 +87,7 @@ public class DiscountCalculator {
         return price;
     }
 
-    private static float birthdayDiscount(float price, Ride ride) {
-        int customer_id = ride.getCustomer_id();
+    private static float birthdayDiscount(float price, int customer_id) {
         Date today_date = new Date();
         DateFormat date_format = new SimpleDateFormat("MM-dd");
         String today = date_format.format(today_date);
