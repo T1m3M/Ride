@@ -1,16 +1,14 @@
 package com.ride.rideapp.eventLog;
 
+import com.ride.rideapp.mappers.AcceptOfferEventRowMapper;
 import com.ride.rideapp.mappers.OfferEventRowMapper;
-import com.ride.rideapp.mappers.RideRowMapper;
 import com.ride.rideapp.models.AcceptOfferEvent;
 import com.ride.rideapp.models.OfferEvent;
-import com.ride.rideapp.models.Ride;
 import com.ride.rideapp.models.TrackRideEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -39,6 +37,22 @@ public class EventLogRepo {
     }
 
     public AcceptOfferEvent offerAccept(int ride_id) {
+
+        String sql = "SELECT offers.accept_time, customers.username " +
+                     "FROM offers, customers, rides " +
+                     "WHERE offers.ride_id = " + ride_id + " AND offers.ride_id = rides.id AND rides.customer_id = customers.id";
+
+        List<AcceptOfferEvent> result = conn.query(sql, new AcceptOfferEventRowMapper());
+
+        if (!result.isEmpty()) {
+
+            // updating offer event object
+            AcceptOfferEvent accept_offer = result.get(0);
+            accept_offer.setEvent_name("ACCEPT_OFFER_EVENT");
+
+            return accept_offer;
+        }
+
         return null;
     }
 
