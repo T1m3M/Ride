@@ -17,6 +17,7 @@ public class PutOfferRepo {
     @Autowired
     private JdbcTemplate conn;
 
+    @Autowired
     private DiscountCalculator discountCalculator;
 
     public Offer putOffer(Integer driver_id, Integer ride_id, Float price) {
@@ -44,8 +45,8 @@ public class PutOfferRepo {
             // calculating all discounts for this price
             offer.setAfter_discount(discountCalculator.calculateDiscount(offer));
 
-            sql = "INSERT INTO offers(id, ride_id, driver_id, price, offer_time, offer_status) VALUES(?, ?, ?, ?, ?, ?)";
-            conn.update(sql, offer.getId(), offer.getRide_id(), offer.getDriver_id(), offer.getPrice(), offer.getOffer_time(), offer.getOffer_status());
+            sql = "INSERT INTO offers(id, ride_id, driver_id, price, after_discount, offer_time, offer_status) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            conn.update(sql, offer.getId(), offer.getRide_id(), offer.getDriver_id(), offer.getPrice(), offer.getAfter_discount(), offer.getOffer_time(), offer.getOffer_status());
 
             return offer;
 

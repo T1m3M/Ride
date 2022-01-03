@@ -5,102 +5,108 @@ import com.ride.rideapp.mappers.DiscountRowMapper;
 import com.ride.rideapp.mappers.HolidayRowMapper;
 import com.ride.rideapp.mappers.RideRowMapper;
 import com.ride.rideapp.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class DiscountCalculator {
 
-    static JdbcTemplate conn;
+    @Autowired
+    JdbcTemplate conn;
 
     public float calculateDiscount(Offer offer) {
 
         int ride_id = offer.getRide_id();
         float price = offer.getPrice();
+        float total_discount = 0;
 
-        String sql = "SELECT * FROM rides WHERE ride_id=" + ride_id;
+        String sql = "SELECT * FROM rides WHERE id=" + ride_id;
         Ride ride = conn.query(sql, new RideRowMapper()).get(0);
 
         // if first ride --> discount 10%
-        price = firstRideDiscount(price, ride.getCustomer_id());
+        total_discount += firstRideDiscount(ride.getCustomer_id());
 
         // if destination == discounted area --> rate% (rate = 10)
-        price = discountedAreaDiscount(price, ride.getDestination());
+        total_discount += discountedAreaDiscount(ride.getDestination());
 
         // if at least 2 passengers --> 5% discount
-        price = twoPassengersDiscount(price, ride.getNumber_of_passengers());
+        total_discount += twoPassengersDiscount(ride.getNumber_of_passengers());
 
         // if date == public holiday --> 5% discount
-        price = holidayDiscount(price);
+        total_discount += holidayDiscount();
 
         // if user's birthday == today --> 10% discount
-        price = birthdayDiscount(price, ride.getCustomer_id());
+        total_discount += birthdayDiscount(ride.getCustomer_id());
+
+        if (total_discount != 0)
+            price = price - (price * total_discount / 100);
 
         return price;
     }
 
-    private static float firstRideDiscount(float price, int customer_id) {
+    private float firstRideDiscount(int customer_id) {
         String sql = "SELECT * FROM rides WHERE customer_id=" + customer_id;
         List<Ride> all_customer_rides = conn.query(sql, new RideRowMapper());
 
         int number_of_rides = all_customer_rides.size();
 
         if (number_of_rides == 1)
-            price = price - (price / 10);
+            return 10;
 
-        return price;
+        return 0;
     }
 
-    private static float discountedAreaDiscount(float price, String destination) {
+    private float discountedAreaDiscount(String destination) {
         String sql = "SELECT * FROM discounts WHERE area_name='" + destination + "'";
         List<Discount> discounts = conn.query(sql, new DiscountRowMapper());
 
-        if (!discounts.isEmpty()) {
-            float rate = discounts.get(0).getRate();
-            price = price - (price / rate);
-        }
+        if (!discounts.isEmpty())
+            return discounts.get(0).getRate();
 
-        return price;
+        return 0;
     }
 
-    private static float twoPassengersDiscount(float price, int number_of_passengers) {
+    private float twoPassengersDiscount(int number_of_passengers) {
         if (number_of_passengers >= 2)
-            price = price - (price / 5);
+            return 5;
 
-        return price;
+        return 0;
     }
 
-    private static float holidayDiscount(float price) {
+    private float holidayDiscount() {
         Date today_date = new Date();
         DateFormat date_format = new SimpleDateFormat("MM-dd");
         String today = date_format.format(today_date);
 
-        String sql = "SELECT * FROM holidays WHERE DATE_FORMAT(holiday_date, '%m-%d')=" + today + "'";
+        String sql = "SELECT * FROM holidays WHERE DATE_FORMAT(holiday_date, '%m-%d')='" + today + "'";
         List<Holiday> holidays = conn.query(sql, new HolidayRowMapper());
 
         if (!holidays.isEmpty())
-            price = price - (price / 5);
+            return 5;
 
-        return price;
+        return 0;
     }
 
-    private static float birthdayDiscount(float price, int customer_id) {
+    private float birthdayDiscount(int ride_id) {
         Date today_date = new Date();
         DateFormat date_format = new SimpleDateFormat("MM-dd");
         String today = date_format.format(today_date);
 
         String sql = "SELECT customers.* " +
-                     "FROM customers, offers " +
-                     "WHERE offers.id=" + customer_id + " AND DATE_FORMAT(customers.birthdate, '%m-%d')='" + today + "'";
+                     "FROM customers, rides " +
+                     "WHERE rides.customer_id=" + ride_id + " AND DATE_FORMAT(customers.birthdate, '%m-%d')='" + today + "'";
 
         List<Customer> customers = conn.query(sql, new CustomerRowMapper());
 
         if (!customers.isEmpty())
-            price = price - (price / 10);
+            return 10;
 
-        return price;
+        return 0;
     }
 }
