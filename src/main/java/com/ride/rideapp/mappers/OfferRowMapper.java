@@ -16,6 +16,7 @@ public class OfferRowMapper implements RowMapper<Offer> {
         offer.setRide_id(rs.getInt("ride_id"));
         offer.setDriver_id(rs.getInt("driver_id"));
         offer.setPrice(rs.getFloat("price"));
+        offer.setAfter_discount(rs.getFloat("after_discount"));
         offer.setOffer_time(rs.getTimestamp("offer_time"));
         offer.setAccept_time(rs.getTimestamp("accept_time"));
         offer.setOffer_status(rs.getBoolean("offer_status"));
