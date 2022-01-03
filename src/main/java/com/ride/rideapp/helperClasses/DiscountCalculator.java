@@ -1,12 +1,10 @@
 package com.ride.rideapp.helperClasses;
 
+import com.ride.rideapp.mappers.CustomerRowMapper;
 import com.ride.rideapp.mappers.DiscountRowMapper;
 import com.ride.rideapp.mappers.HolidayRowMapper;
 import com.ride.rideapp.mappers.RideRowMapper;
-import com.ride.rideapp.models.Discount;
-import com.ride.rideapp.models.Holiday;
-import com.ride.rideapp.models.Offer;
-import com.ride.rideapp.models.Ride;
+import com.ride.rideapp.models.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.text.DateFormat;
@@ -39,7 +37,7 @@ public class DiscountCalculator {
         price = holidayDiscount(price);
 
         // if user's birthday == today --> 10% discount
-        price = birthdayDiscount(price, offer);
+        price = birthdayDiscount(price, ride);
 
         return price;
     }
@@ -88,7 +86,7 @@ public class DiscountCalculator {
         DateFormat date_format = new SimpleDateFormat("MM-dd");
         String today = date_format.format(today_date);
 
-        String sql = "SELECT * FROM holidays WHERE DATE_FORMAT(holiday_date, '%m-%d')=" + today;
+        String sql = "SELECT * FROM holidays WHERE DATE_FORMAT(holiday_date, '%m-%d')=" + today + "'";
         List<Holiday> holidays = conn.query(sql, new HolidayRowMapper());
 
         if (!holidays.isEmpty())
@@ -97,7 +95,21 @@ public class DiscountCalculator {
         return price;
     }
 
-    private static float birthdayDiscount(float price, Offer offer) {
+    private static float birthdayDiscount(float price, Ride ride) {
+        int customer_id = ride.getCustomer_id();
+        Date today_date = new Date();
+        DateFormat date_format = new SimpleDateFormat("MM-dd");
+        String today = date_format.format(today_date);
+
+        String sql = "SELECT customers.* " +
+                     "FROM customers, offers " +
+                     "WHERE offers.id=" + customer_id + " AND DATE_FORMAT(customers.birthdate, '%m-%d')='" + today + "'";
+
+        List<Customer> customers = conn.query(sql, new CustomerRowMapper());
+
+        if (!customers.isEmpty())
+            price = price - (price / 10);
+
         return price;
     }
 }
