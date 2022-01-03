@@ -33,9 +33,10 @@ public class RequestRideRepo {
         ride.setDestination(destination);
         ride.setNumber_of_passengers(number_of_passengers);
         ride.setRide_status(true);
+        ride.setRide_status(false);
 
-        sql = "INSERT INTO rides(id, customer_id, source, destination, number_of_passengers, ride_status) VALUES(?, ?, ?, ?, ?, ?)";
-        conn.update(sql, ride.getId(), ride.getCustomer_id(), ride.getSource(), ride.getDestination(), ride.getNumber_of_passengers(), ride.getRide_status());
+        sql = "INSERT INTO rides(id, customer_id, source, destination, number_of_passengers, ride_status, paid_status) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        conn.update(sql, ride.getId(), ride.getCustomer_id(), ride.getSource(), ride.getDestination(), ride.getNumber_of_passengers(), ride.getRide_status(), ride.getPaid_status());
 
         return ride;
     }

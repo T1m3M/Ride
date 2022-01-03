@@ -17,7 +17,7 @@ public class Ride {
 
     Timestamp start_time, end_time;
     int offer_id;
-    boolean ride_status;
+    boolean ride_status, paid_status;
 
     public int getId() {
         return id;
@@ -89,5 +89,13 @@ public class Ride {
 
     public void setRide_status(boolean ride_status) {
         this.ride_status = ride_status;
+    }
+
+    public boolean getPaid_status() {
+        return paid_status;
+    }
+
+    public void setPaid_status(boolean paid_status) {
+        this.paid_status = paid_status;
     }
 }

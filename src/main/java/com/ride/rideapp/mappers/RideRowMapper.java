@@ -19,6 +19,7 @@ public class RideRowMapper implements RowMapper<Ride> {
         ride.setEnd_time(rs.getTimestamp("end_time"));
         ride.setOffer_id(rs.getInt("offer_id"));
         ride.setRide_status(rs.getBoolean("ride_status"));
+        ride.setPaid_status(rs.getBoolean("paid_status"));
 
         return ride;
     }
