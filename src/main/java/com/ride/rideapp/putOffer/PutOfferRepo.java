@@ -1,5 +1,6 @@
 package com.ride.rideapp.putOffer;
 
+import com.ride.rideapp.helperClasses.DiscountCalculator;
 import com.ride.rideapp.mappers.OfferRowMapper;
 import com.ride.rideapp.models.Offer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class PutOfferRepo {
             offer.setPrice(price);
             offer.setOffer_time(new Timestamp(System.currentTimeMillis()));
             offer.setOffer_status(true);
+
+            // calculating all discounts for this price
+            offer.setAfter_discount(DiscountCalculator.calculateDiscount(offer));
 
             sql = "INSERT INTO offers(id, ride_id, driver_id, price, offer_time, offer_status) VALUES(?, ?, ?, ?, ?, ?)";
             conn.update(sql, offer.getId(), offer.getRide_id(), offer.getDriver_id(), offer.getPrice(), offer.getOffer_time(), offer.getOffer_status());
