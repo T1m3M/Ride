@@ -24,7 +24,7 @@ public class AcceptOfferRepo {
             // updating offer object
             Offer offer = result.get(0);
             offer.setOffer_status(false);
-            offer.setOffer_time(new Timestamp(System.currentTimeMillis()));
+            offer.setAccept_time(new Timestamp(System.currentTimeMillis()));
 
             sql = "UPDATE offers SET offer_status=?, accept_time=? WHERE id=" + offer_id;
             conn.update(sql, offer.getOffer_status(), offer.getOffer_time());
