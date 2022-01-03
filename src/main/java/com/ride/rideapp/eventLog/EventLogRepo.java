@@ -2,6 +2,7 @@ package com.ride.rideapp.eventLog;
 
 import com.ride.rideapp.mappers.AcceptOfferEventRowMapper;
 import com.ride.rideapp.mappers.OfferEventRowMapper;
+import com.ride.rideapp.mappers.TrackRideEventRowMapper;
 import com.ride.rideapp.models.AcceptOfferEvent;
 import com.ride.rideapp.models.OfferEvent;
 import com.ride.rideapp.models.TrackRideEvent;
@@ -57,6 +58,22 @@ public class EventLogRepo {
     }
 
     public TrackRideEvent rideStart(int ride_id) {
+
+        String sql = "SELECT rides.start_time as event_time, drivers.username, customers.username " +
+                     "FROM rides, drivers, customers, offers " +
+                     "WHERE rides.id = " + ride_id + " AND rides.customer_id = customers.id AND rides.offer_id = offers.id AND offers.driver_id = drivers.id";
+
+        List<TrackRideEvent> result = conn.query(sql, new TrackRideEventRowMapper());
+
+        if (!result.isEmpty()) {
+
+            // updating track ride event object
+            TrackRideEvent track_ride = result.get(0);
+            track_ride.setEvent_name("RIDE_START_EVENT");
+
+            return track_ride;
+        }
+
         return null;
     }
 
