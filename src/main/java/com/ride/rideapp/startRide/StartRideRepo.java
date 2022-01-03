@@ -30,8 +30,8 @@ public class StartRideRepo {
             sql = "UPDATE rides SET start_time=?, ride_status=? WHERE id=" + ride_id;
             conn.update(sql, ride.getStart_time(), ride.getRide_status());
 
-            // change driver available status and decrement seats number
-            sql = "UPDATE drivers SET available_status=?, seats_number = seats_number - 1 WHERE id=" + ride_id + " AND seats_number > 0";
+            // change driver available status
+            sql = "UPDATE drivers SET available_status=? WHERE id=" + ride_id;
             conn.update(sql, false);
 
             return ride;
