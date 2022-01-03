@@ -10,6 +10,15 @@ public class Driver extends User {
     boolean verification_status;
     boolean available_status;
     int seats_number;
+    private float balance;
+
+    public float getBalance() {
+        return balance;
+    }
+
+    public void setBalance(float balance) {
+        this.balance = balance;
+    }
 
     public boolean getAvailable_status() {
         return available_status;

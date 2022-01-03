@@ -21,6 +21,7 @@ public class DriverRowMapper implements RowMapper<Driver> {
         user.setVerification_status(rs.getBoolean("verification_status"));
         user.setAvailable_status(rs.getBoolean("available_status"));
         user.setSeats_number(rs.getInt("seats_number"));
+        user.setBalance(rs.getFloat("balance"));
 
         return user;
     }

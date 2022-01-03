@@ -70,9 +70,10 @@ public class RegisterRepo {
             user.setPassword(password);
             user.setAccount_status(true);
             user.setBirthdate(birthdate);
+            user.setBalance(0);
 
-            sql = "INSERT INTO customers(id, username, mobile, password, account_status, birthdate) VALUES(?, ?, ?, ?, ?, ?)";
-            conn.update(sql, user.getId(), user.getUsername(), user.getMobile(), user.getPassword(), user.getAccount_status(), user.getBirthdate());
+            sql = "INSERT INTO customers(id, username, mobile, password, account_status, birthdate, balance) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            conn.update(sql, user.getId(), user.getUsername(), user.getMobile(), user.getPassword(), user.getAccount_status(), user.getBirthdate(), user.getBalance());
 
             return user;
 
@@ -105,8 +106,9 @@ public class RegisterRepo {
             user.setVerification_status(false);
             user.setAvailable_status(true);
             user.setSeats_number(seats_num);
+            user.setBalance(0);
 
-            sql = "INSERT INTO drivers(id, username, mobile, password, account_status, national_id, driver_license, average_rating, verification_status, available_status, seats_number) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO drivers(id, username, mobile, password, account_status, national_id, driver_license, average_rating, verification_status, available_status, seats_number, balance) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             conn.update(
                     sql,
                     user.getId(),
@@ -119,7 +121,8 @@ public class RegisterRepo {
                     user.getAverage_rating(),
                     user.getVerification_status(),
                     user.getAvailable_status(),
-                    user.getSeats_number()
+                    user.getSeats_number(),
+                    user.getBalance()
             );
 
             return user;

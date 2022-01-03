@@ -16,6 +16,7 @@ public class CustomerRowMapper implements RowMapper<Customer> {
         user.setPassword(rs.getString("password"));
         user.setAccount_status(rs.getBoolean("account_status"));
         user.setBirthdate(rs.getDate("birthdate"));
+        user.setBalance(rs.getFloat("balance"));
 
         return user;
     }
